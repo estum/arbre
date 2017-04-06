@@ -4,7 +4,6 @@ module Arbre
   module HTML
 
     class TextNode < Element
-
       builder_method :text_node
 
       # Builds a text node from a string
@@ -23,7 +22,7 @@ module Arbre
       end
 
       def class_list
-        []
+        EMPTY
       end
 
       def tag_name

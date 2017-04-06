@@ -8,19 +8,19 @@ module Arbre
         @element = element
       end
 
-      def respond_to?(method, include_all = false)
-        if method.to_s == 'to_ary'
-          false
-        else
-          super || @element.respond_to?(method, include_all)
-        end
-      end
-
       def method_missing(method, *args, &block)
-        if method.to_s == 'to_ary'
+        if method == :to_ary
           super
         else
           @element.__send__ method, *args, &block
+        end
+      end
+
+      def respond_to?(method, include_all = false)
+        if method == :to_ary
+          false
+        else
+          super || @element.respond_to?(method, include_all)
         end
       end
     end

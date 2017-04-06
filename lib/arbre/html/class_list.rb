@@ -11,9 +11,8 @@ module Arbre
       end
 
       def add(class_names)
-        class_names.to_s.split(" ").each do |class_name|
-          super(class_name)
-        end
+        (class_names.respond_to?(:each) ? class_names : class_names.to_s.split(" ")).
+          each { |class_name| super(class_name) }
         self
       end
       alias :<< :add

@@ -34,7 +34,7 @@ module Arbre
     #                         instance methods within the context.
     #
     # @yield [] The block that will get instance eval'd in the context
-    def initialize(assigns = {}, helpers = nil, &block)
+    def initialize(assigns = nil, helpers = nil, &block)
       assigns = assigns || {}
       @_assigns = assigns.symbolize_keys
 
@@ -76,7 +76,7 @@ module Arbre
     # of the html.
     def method_missing(method, *args, &block)
       if cached_html.respond_to? method
-        cached_html.send method, *args, &block
+        cached_html.public_send(method, *args, &block)
       else
         super
       end
@@ -108,6 +108,5 @@ module Arbre
         html
       end
     end
-
   end
 end
