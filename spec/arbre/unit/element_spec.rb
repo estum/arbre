@@ -175,6 +175,7 @@ describe Arbre::Element do
     let(:collection){ element + "hello world" }
 
     it "should render the children collection" do
+      expect(element).to receive(:children?).and_return(true)
       expect(element.children).to receive(:to_s).and_return("content")
       expect(element.to_s).to eq("content")
     end
